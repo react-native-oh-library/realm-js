@@ -1,6 +1,6 @@
 {
-  "name": "@realm/react",
-  "version": "0.10.0",
+  "name": "@react-native-oh-tpl/realm-react",
+  "version": "0.10.0-0.0.1",
   "description": "React specific hooks and implementation helpers for Realm",
   "type": "module",
   "main": "dist/index.cjs",
@@ -65,7 +65,7 @@
     "react": "18.2.0",
     "react-native": "0.75.1",
     "react-test-renderer": "18.2.0",
-    "realm": "*",
+    "@react-native-oh-tpl/realm":"file:react-native-oh-tpl-realm-12.13.1-0.0.1.tgz",
     "ts-jest": "^29.1.2"
   },
   "peerDependencies": {
@@ -105,6 +105,10 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
+    "@realm/react": "0.10.0",
     "lodash.isequal": "^4.5.0"
+  },
+  "harmony": {
+    "alias": "@realm/react"
   }
 }
