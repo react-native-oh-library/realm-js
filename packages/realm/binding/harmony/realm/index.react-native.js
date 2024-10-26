@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2021 Realm Inc.
+// Copyright 2024 Realm Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,15 +16,14 @@
 //
 ////////////////////////////////////////////////////////////////////////////
 
-/* eslint-env node */
+/* eslint-env commonjs */
+/* global process */
 
-module.exports = {
-  // config for a library is scoped under "dependency" key
-  dependency: {
-    platforms: {
-      harmony: {
-        sourceDir: "binding/harmony",
-      },
-    },
-  },
-};
+// Runtime check to provide our Node.js entrypoint instead of requiring end-users to apply a mock
+if (typeof process !== "undefined" && typeof process.env?.JEST_WORKER_ID !== "undefined") {
+  // Re-naming "require" to obfuscate the call from Metro
+  const nodeRequire = require;
+  module.exports = nodeRequire("./dist/platform/node/index.js");
+} else {
+  module.exports = require("./dist/platform/react-native/index.js");
+}

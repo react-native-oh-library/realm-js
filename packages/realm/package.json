@@ -1,6 +1,6 @@
 {
-  "name": "realm",
-  "version": "12.13.1",
+  "name": "@react-native-oh-tpl/realm",
+  "version": "12.13.1-0.0.1",
   "description": "Realm by MongoDB is an offline-first mobile database: an alternative to SQLite and key-value stores",
   "license": "apache-2.0",
   "homepage": "https://www.mongodb.com/docs/realm/",
@@ -54,13 +54,17 @@
     "#realm.node": "./prebuilds/node/realm.node"
   },
   "files": [
+    "RNRealm.ts",
+    "NativeRNRealm.ts",
     "scripts",
     "dist",
     "!dist/scripts/build/",
+    "binding/harmony",
     "binding/jsi",
     "binding/*.hpp",
     "bindgen/src/*.h",
     "bindgen/vendor/realm-core/bindgen/src/realm_helpers.h",
+    "prebuilds/harmony",
     "index.react-native.js",
     "react-native.config.js",
     "RealmJS.podspec",
@@ -72,9 +76,13 @@
     "test:types": "tsc --project type-tests/tsconfig.json",
     "lint": "eslint --ext .js,.mjs,.ts .",
     "prebuild": "tsx ./src/scripts/build/cli.ts",
+    "prebuild-harmony": "wireit",
     "prebuild-node": "wireit",
     "build:ts": "wireit",
     "build:node": "wireit",
+    "bindgen:jsi1": "wireit",
+    "build:ts1": "wireit",
+    "bindgen:wrapper1": "wireit",
     "bindgen:jsi": "wireit",
     "bindgen:wrapper": "wireit",
     "check-types": "wireit",
@@ -95,6 +103,16 @@
         "TSX_TSCONFIG_PATH": "tsconfig.tests.json"
       }
     },
+    "prebuild-harmony": {
+      "command": "tsx ./src/scripts/build/cli.ts build-harmony",
+      "files": [
+        "bindgen/vendor/realm-core/src",
+        "src/scripts"
+      ],
+      "output": [
+        "prebuilds/harmony"
+      ]
+    },
     "build:ts": {
       "command": "tsc --build",
       "dependencies": [
@@ -109,6 +127,48 @@
       "command": "cmake --build binding/node/build --target realm-js-node",
       "dependencies": [
         "bindgen:configure"
+      ]
+    },
+    "bindgen:jsi1": {
+      "command": "tsx bindgen/vendor/realm-core/bindgen/realm-bindgen.ts --template bindgen/src/templates/jsi.ts --spec bindgen/vendor/realm-core/bindgen/spec.yml --spec bindgen/js_spec.yml --opt-in bindgen/js_opt_in_spec.yml --output ./binding/jsi",
+      "dependencies": [
+        "bindgen:generate:spec-schema"
+      ],
+      "files": [
+        "bindgen/vendor/realm-core/bindgen/spec.yml",
+        "bindgen/vendor/realm-core/bindgen/src",
+        "bindgen/js_spec.yml",
+        "bindgen/js_opt_in_spec.yml",
+        "bindgen/src",
+        "!bindgen/src/templates",
+        "bindgen/src/templates/jsi.ts"
+      ],
+      "output": [
+        "binding/jsi/jsi_init.cpp"
+      ]
+    },
+    "build:ts1": {
+      "command": "tsc --build",
+      "dependencies": [
+        "../fetch:build"
+      ]
+    },
+    "bindgen:wrapper1": {
+      "command": "tsx bindgen/vendor/realm-core/bindgen/realm-bindgen.ts --template bindgen/src/templates/wrapper.ts --spec bindgen/vendor/realm-core/bindgen/spec.yml --spec bindgen/js_spec.yml --opt-in bindgen/js_opt_in_spec.yml --output ./src/binding",
+      "dependencies": [
+        "bindgen:generate:spec-schema"
+      ],
+      "files": [
+        "bindgen/vendor/realm-core/bindgen/spec.yml",
+        "bindgen/vendor/realm-core/bindgen/src",
+        "bindgen/js_spec.yml",
+        "bindgen/js_opt_in_spec.yml",
+        "bindgen/src",
+        "!bindgen/src/templates",
+        "bindgen/src/templates/wrapper.ts"
+      ],
+      "output": [
+        "src/binding/wrapper.generated.ts"
       ]
     },
     "bindgen:jsi": {
@@ -202,8 +262,10 @@
     "bson": "^4.7.2",
     "debug": "^4.3.4",
     "node-machine-id": "^1.1.12",
+    "npm": "^10.9.0",
     "path-browserify": "^1.0.1",
-    "prebuild-install": "^7.1.2"
+    "prebuild-install": "^7.1.2",
+    "realm": "^12.13.1"
   },
   "peerDependencies": {
     "react-native": ">=0.71.0"
@@ -250,5 +312,8 @@
     "napi_versions": [
       6
     ]
+  },
+  "harmony": {
+    "alias": "realm"
   }
 }
