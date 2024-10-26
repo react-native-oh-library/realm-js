@@ -57,14 +57,10 @@
     "scripts",
     "dist",
     "!dist/scripts/build/",
-    "binding/android",
-    "binding/apple",
     "binding/jsi",
     "binding/*.hpp",
     "bindgen/src/*.h",
     "bindgen/vendor/realm-core/bindgen/src/realm_helpers.h",
-    "prebuilds/apple",
-    "prebuilds/android",
     "index.react-native.js",
     "react-native.config.js",
     "RealmJS.podspec",
@@ -76,9 +72,6 @@
     "test:types": "tsc --project type-tests/tsconfig.json",
     "lint": "eslint --ext .js,.mjs,.ts .",
     "prebuild": "tsx ./src/scripts/build/cli.ts",
-    "prebuild-apple": "wireit",
-    "prebuild-apple:simulator": "wireit",
-    "prebuild-android": "wireit",
     "prebuild-node": "wireit",
     "build:ts": "wireit",
     "build:node": "wireit",
@@ -101,36 +94,6 @@
       "env": {
         "TSX_TSCONFIG_PATH": "tsconfig.tests.json"
       }
-    },
-    "prebuild-apple": {
-      "command": "tsx ./src/scripts/build/cli.ts build-apple",
-      "files": [
-        "bindgen/vendor/realm-core/src",
-        "src/scripts"
-      ],
-      "output": [
-        "prebuilds/apple/realm-core.xcframework"
-      ]
-    },
-    "prebuild-apple:simulator": {
-      "command": "tsx ./src/scripts/build/cli.ts build-apple --platform iphonesimulator --configuration Debug",
-      "files": [
-        "bindgen/vendor/realm-core/src",
-        "src/scripts"
-      ],
-      "output": [
-        "prebuilds/apple/realm-core.xcframework"
-      ]
-    },
-    "prebuild-android": {
-      "command": "tsx ./src/scripts/build/cli.ts build-android",
-      "files": [
-        "bindgen/vendor/realm-core/src",
-        "src/scripts"
-      ],
-      "output": [
-        "prebuilds/android"
-      ]
     },
     "build:ts": {
       "command": "tsc --build",
