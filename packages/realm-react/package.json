@@ -96,12 +96,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/realm/realm-js.git",
+    "url": "https://github.com/react-native-oh-library/realm-js.git",
     "directory": "packages/realm-react"
   },
-  "homepage": "https://github.com/realm/realm-js/tree/main/packages/realm-react#readme",
+  "homepage": "https://github.com/react-native-oh-library/realm-js/tree/main/packages/realm-react#readme",
   "bugs": {
-    "url": "https://github.com/realm/realm-js/issues"
+    "url": "https://github.com/react-native-oh-library/realm-js/issues"
   },
   "license": "Apache-2.0",
   "dependencies": {
@@ -110,5 +110,9 @@
   },
   "harmony": {
     "alias": "@realm/react"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+     "access": "public"
   }
 }
