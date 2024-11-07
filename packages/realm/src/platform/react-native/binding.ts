@@ -18,14 +18,11 @@
 
 declare const global: Record<string, unknown>;
 
-// import { NativeModules } from "react-native";
 import { NativeBigInt, PolyfilledBigInt, type binding, injectNativeModule } from "../binding";
 import { assert } from "../../assert";
-import RNRealm from "../../../RNRealm";
+import RNRealm from "./NativeRNRealm";
 
 try {
-  // const RealmNativeModule = NativeModules.Realm;
-  // RealmNativeModule.injectModuleIntoJSGlobal();
   RNRealm.injectModuleIntoJSGlobal();
   // Read the global into the local scope
   const { __injectedRealmBinding: nativeModule } = global;

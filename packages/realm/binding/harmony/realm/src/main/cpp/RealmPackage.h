@@ -1,13 +1,16 @@
 #include "RNOH/Package.h"
 #include "ComponentDescriptors.h"
 #include "RNRealm.h"
+#include "VarCache.h"
 
 namespace rnoh {
 
 class RNCRealmFactoryDelegate : public TurboModuleFactoryDelegate {
 public:
     SharedTurboModule createTurboModule(Context ctx, const std::string &name) const override {
+                
         if (name == "RNRealm") {
+            VarCache::Singleton()->SetContext(ctx);
             return std::make_shared<RNRealm>(ctx, name);
         }
         return nullptr;
