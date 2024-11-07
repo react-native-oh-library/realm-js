@@ -17,6 +17,16 @@ jsi::Value getFilesDir(facebook::jsi::Runtime &rt, react::TurboModule &turboModu
     return static_cast<ArkTSTurboModule &>(turboModule).call(rt, "getFilesDir", args, count);
 }
 
+jsi::Value removeFile(facebook::jsi::Runtime &rt, react::TurboModule &turboModule,
+                              const facebook::jsi::Value *args, size_t count) {    
+    return static_cast<ArkTSTurboModule &>(turboModule).call(rt, "removeFile", args, count);
+}
+
+jsi::Value removeDirectory(facebook::jsi::Runtime &rt, react::TurboModule &turboModule,
+                              const facebook::jsi::Value *args, size_t count) {    
+    return static_cast<ArkTSTurboModule &>(turboModule).call(rt, "removeDirectory", args, count);
+}
+
 jsi::Value injectModuleIntoJSGlobal(facebook::jsi::Runtime &rt, react::TurboModule &turboModule,
                               const facebook::jsi::Value *args, size_t count) {          
     auto self = static_cast<RNRealm *>(&turboModule);      
@@ -29,7 +39,9 @@ RNRealm::RNRealm(const ArkTSTurboModule::Context ctx, const std::string name) : 
     methodMap_ = {
         methodMap_ = {
             {"injectModuleIntoJSGlobal", {0, rnoh::injectModuleIntoJSGlobal}},
-            {"getFilesDir", {0, rnoh::getFilesDir}}
+            {"getFilesDir", {0, rnoh::getFilesDir}},
+            {"removeFile", {1, rnoh::removeFile}},
+            {"removeDirectory", {1, rnoh::removeDirectory}}
         }
     };
 }
