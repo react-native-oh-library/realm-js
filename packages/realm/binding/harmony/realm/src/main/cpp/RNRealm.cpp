@@ -27,6 +27,11 @@ jsi::Value removeDirectory(facebook::jsi::Runtime &rt, react::TurboModule &turbo
     return static_cast<ArkTSTurboModule &>(turboModule).call(rt, "removeDirectory", args, count);
 }
 
+jsi::Value copyBundledRealmFiles(facebook::jsi::Runtime &rt, react::TurboModule &turboModule,
+                              const facebook::jsi::Value *args, size_t count) {    
+    return static_cast<ArkTSTurboModule &>(turboModule).call(rt, "copyBundledRealmFiles", args, count);
+}
+
 jsi::Value injectModuleIntoJSGlobal(facebook::jsi::Runtime &rt, react::TurboModule &turboModule,
                               const facebook::jsi::Value *args, size_t count) {          
     auto self = static_cast<RNRealm *>(&turboModule);      
@@ -41,7 +46,8 @@ RNRealm::RNRealm(const ArkTSTurboModule::Context ctx, const std::string name) : 
             {"injectModuleIntoJSGlobal", {0, rnoh::injectModuleIntoJSGlobal}},
             {"getFilesDir", {0, rnoh::getFilesDir}},
             {"removeFile", {1, rnoh::removeFile}},
-            {"removeDirectory", {1, rnoh::removeDirectory}}
+            {"removeDirectory", {1, rnoh::removeDirectory}},
+            {"copyBundledRealmFiles", {0, rnoh::copyBundledRealmFiles}}
         }
     };
 }

@@ -7,8 +7,7 @@ namespace rnoh {
 
 class RNCRealmFactoryDelegate : public TurboModuleFactoryDelegate {
 public:
-    SharedTurboModule createTurboModule(Context ctx, const std::string &name) const override {
-                
+    SharedTurboModule createTurboModule(Context ctx, const std::string &name) const override {        
         if (name == "RNRealm") {
             VarCache::Singleton()->SetContext(ctx);
             return std::make_shared<RNRealm>(ctx, name);
@@ -24,5 +23,4 @@ public:
         return std::make_unique<RNCRealmFactoryDelegate>();
     }
 };
-
 }// namespace rnoh
