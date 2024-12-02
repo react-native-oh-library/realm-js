@@ -59,6 +59,12 @@ void JsPlatformHelpers::ensure_directory_exists_for_file(const std::string& file
 
 void JsPlatformHelpers::copy_bundled_realm_files()
 {
+    auto rnInstancePtr = VarCache::Singleton()->GetContext().instance.lock();
+    if (rnInstancePtr != nullptr) {
+        auto turboModule = rnInstancePtr->getTurboModule("RNRealm");
+        auto arkTsTurboModule = std::dynamic_pointer_cast<rnoh::ArkTSTurboModule>(turboModule);
+        arkTsTurboModule->callSync("copyBundledRealmFiles", {""});
+    }
 }
 
 void JsPlatformHelpers::remove_realm_files_from_directory(const std::string& directory)
