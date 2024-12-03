@@ -1,11 +1,13 @@
-
-
-import { RNPackage, TurboModulesFactory } from "@rnoh/react-native-openharmony/ts";
-import type { TurboModule, TurboModuleContext } from "@rnoh/react-native-openharmony/ts";
+import {
+  RNPackage,
+  AnyThreadTurboModuleFactory,
+  AnyThreadTurboModuleContext,
+  AnyThreadTurboModule
+} from '@rnoh/react-native-openharmony/ts';
 import { RNRealmModule } from "./RNRealmModule";
 
-class RNRealmModulesFactory extends TurboModulesFactory {
-  createTurboModule(name: string): TurboModule | null {
+class RNRealmModulesFactory extends AnyThreadTurboModuleFactory {
+  createTurboModule(name: string): AnyThreadTurboModule | null {
     if (name === RNRealmModule.NAME) {
       return new RNRealmModule(this.ctx);
     }
@@ -18,7 +20,7 @@ class RNRealmModulesFactory extends TurboModulesFactory {
 }
 
 export class RNRealmPackage extends RNPackage {
-  createTurboModulesFactory(ctx: TurboModuleContext): TurboModulesFactory {
+  createAnyThreadTurboModuleFactory(ctx: AnyThreadTurboModuleContext): AnyThreadTurboModuleFactory  {
     return new RNRealmModulesFactory(ctx);
   }
 }
