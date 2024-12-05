@@ -72,16 +72,30 @@ struct WeakObjectWrapper : jsi::HostObject {
 };
 
 template <typename T>
+#if __cpp_concepts >= 201907L
 std::remove_cvref_t<T> copyIfNeeded(jsi::Runtime& rt, const T& val)
 {
     return T(rt, val);
 }
+#else 
+std::remove_cv_t<T> copyIfNeeded(jsi::Runtime& rt, const T& val)
+{
+    return T(rt, val);
+}
+#endif
 
 template <typename T>
+#if __cpp_concepts >= 201907L
 std::remove_cvref_t<T> copyIfNeeded(jsi::Runtime&, T&& val)
 {
     return FWD(val);
 }
+#else 
+std::remove_cv_t<T> copyIfNeeded(jsi::Runtime&, T&& val)
+{
+    return FWD(val);
+}
+#endif
 
 #define FWD_OR_COPY(x) copyIfNeeded(_env, FWD(x))
 
@@ -134,12 +148,17 @@ REALM_NOINLINE inline jsi::Value toJsiException(jsi::Runtime& env, const std::ex
  */
 template <typename Func>
 class MakeCopyable {
+private:
+    static_assert(!std::is_copy_constructible_v<Func>);
+    static_assert(!std::is_reference_v<Func>);
+    std::shared_ptr<Func> m_func;
 public:
     explicit MakeCopyable(Func&& func)
         : m_func(std::make_shared<Func>(FWD(func)))
     {
     }
-
+    
+#if __cpp_concepts >= 201907L
     auto operator()(auto&&... args) const
         // TODO replace with this once stdlib has concepts.
         // requires std::invocable<Func, decltype(FWD(args))...>
@@ -147,17 +166,23 @@ public:
     {
         return (*m_func)(FWD(args)...);
     }
+ #else    
+    template<typename... Args>
+    auto operator()(Args&&... args) const 
+        -> typename std::enable_if<std::is_invocable<Func, Args&&...>::value, decltype((*m_func)(std::forward<Args>(args)...))>::type 
+    {
+        return (*m_func)(std::forward<Args>(args)...);
+    }
+#endif
 
-private:
-    static_assert(!std::is_copy_constructible_v<Func>);
-    static_assert(!std::is_reference_v<Func>);
-    std::shared_ptr<Func> m_func;
 };
 
+
+#if __cpp_concepts >= 201907L
 /**
  * Specialization if Func is already copyable stores Func inline.
  */
-template <typename Func>
+template <typename Func>    
     requires std::is_copy_constructible_v<Func>
 class MakeCopyable<Func> {
 public:
@@ -178,6 +203,7 @@ private:
     static_assert(!std::is_reference_v<Func>);
     Func m_func;
 };
+#endif
 
 } // namespace
 } // namespace realm::js::JSI
