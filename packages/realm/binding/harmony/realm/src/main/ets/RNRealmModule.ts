@@ -1,15 +1,14 @@
 import type { common } from "@kit.AbilityKit";
-import type { TurboModuleContext } from "@rnoh/react-native-openharmony/ts";
-import { TurboModule } from "@rnoh/react-native-openharmony/ts";
+import { AnyThreadTurboModule, AnyThreadTurboModuleContext } from '@rnoh/react-native-openharmony/ts';
 import { fileIo as fs } from '@kit.CoreFileKit';
 import { resourceManager } from '@kit.LocalizationKit'
 import { BusinessError } from '@kit.BasicServicesKit';
 
-export class RNRealmModule extends TurboModule {
+export class RNRealmModule extends AnyThreadTurboModule {
   static NAME = "RNRealm" as const;
   protected context: common.UIAbilityContext;
 
-  constructor(protected ctx: TurboModuleContext) {
+  constructor(ctx: AnyThreadTurboModuleContext) {
     super(ctx);
     this.context = ctx?.uiAbilityContext;
   }
