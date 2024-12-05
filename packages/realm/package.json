@@ -54,8 +54,6 @@
     "#realm.node": "./prebuilds/node/realm.node"
   },
   "files": [
-    "RNRealm.ts",
-    "NativeRNRealm.ts",
     "scripts",
     "dist",
     "!dist/scripts/build/",

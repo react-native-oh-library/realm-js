@@ -25,6 +25,11 @@
 #include "platform.hpp"
 #include <glog/logging.h>
 
+#include <ReactCommon/TurboModule.h>
+#include "RNOH/ArkTSTurboModule.h"
+#include "VarCache.h"
+#include "RNOH/RNInstance.h"
+
 #define REALM_FILE_FILTER ".realm"
 #define REALM_FILE_FILTER_LEN 6
 
@@ -36,7 +41,6 @@ static inline bool is_realm_file(const char* str)
     return strncmp(str + lenstr - REALM_FILE_FILTER_LEN, REALM_FILE_FILTER, REALM_FILE_FILTER_LEN) == 0;
 }
 
-// static AAssetManager* s_asset_manager;
 static std::string s_default_realm_directory;
 
 namespace realm {
@@ -59,23 +63,33 @@ void JsPlatformHelpers::copy_bundled_realm_files()
 
 void JsPlatformHelpers::remove_realm_files_from_directory(const std::string& directory)
 {
-    std::string cmd = "rm " + s_default_realm_directory + "/*.realm " + s_default_realm_directory + "/*.realm.lock";
-    system(cmd.c_str());
+    std::string path = s_default_realm_directory + "/*.realm " + s_default_realm_directory + "/*.realm.lock";
+    auto rnInstancePtr = VarCache::Singleton()->GetContext().instance.lock();
+    if (rnInstancePtr != nullptr) {
+        auto turboModule = rnInstancePtr->getTurboModule("RNRealm");
+        auto arkTsTurboModule = std::dynamic_pointer_cast<rnoh::ArkTSTurboModule>(turboModule);
+        arkTsTurboModule->callSync("removeFile", {path});
+    }
 }
 
 void JsPlatformHelpers::remove_directory(const std::string& path)
 {
-    std::string cmd_clear_dir = "rm " + path + "/*";
-    system(cmd_clear_dir.c_str());
-
-    std::string cmd_rmdir = "rmdir " + path;
-    system(cmd_rmdir.c_str());
+    auto rnInstancePtr = VarCache::Singleton()->GetContext().instance.lock();
+    if (rnInstancePtr != nullptr) {
+        auto turboModule = rnInstancePtr->getTurboModule("RNRealm");
+        auto arkTsTurboModule = std::dynamic_pointer_cast<rnoh::ArkTSTurboModule>(turboModule);
+        arkTsTurboModule->callSync("removeDirectory", {path});
+    }
 }
 
 void JsPlatformHelpers::remove_file(const std::string& path)
 {
-    std::string cmd = "rm " + path;
-    system(cmd.c_str());
+    auto rnInstancePtr = VarCache::Singleton()->GetContext().instance.lock();
+    if (rnInstancePtr != nullptr) {
+        auto turboModule = rnInstancePtr->getTurboModule("RNRealm");
+        auto arkTsTurboModule = std::dynamic_pointer_cast<rnoh::ArkTSTurboModule>(turboModule);
+        arkTsTurboModule->callSync("removeFile", {path});
+    }
 }
 
 void JsPlatformHelpers::print(const char* fmt, ...)
