@@ -1,6 +1,6 @@
 {
   "name": "@react-native-oh-tpl/realm-react",
-  "version": "0.10.0-0.0.2",
+  "version": "0.10.0-0.0.3",
   "description": "React specific hooks and implementation helpers for Realm",
   "type": "module",
   "main": "dist/index.cjs",
@@ -65,7 +65,7 @@
     "react": "18.2.0",
     "react-native": "0.75.1",
     "react-test-renderer": "18.2.0",
-    "@react-native-oh-tpl/realm":"file:react-native-oh-tpl-realm-12.13.1-0.0.2.tgz",
+    "@react-native-oh-tpl/realm":"^12.13.1-0.0.2",
     "ts-jest": "^29.1.2"
   },
   "peerDependencies": {
