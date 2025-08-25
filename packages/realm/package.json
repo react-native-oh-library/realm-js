@@ -1,6 +1,6 @@
 {
-  "name": "@react-native-oh-tpl/realm",
-  "version": "12.13.1-0.0.7-rc.1",
+  "name": "@react-native-ohos/realm",
+  "version": "12.14.2",
   "description": "Realm by MongoDB is an offline-first mobile database: an alternative to SQLite and key-value stores",
   "license": "apache-2.0",
   "homepage": "https://www.mongodb.com/docs/realm/",
@@ -263,7 +263,8 @@
     "npm": "^10.9.0",
     "path-browserify": "^1.0.1",
     "prebuild-install": "^7.1.2",
-    "realm": "^12.13.1"
+    "react-native-get-random-values": "^1.11.0",
+    "realm": "^12.14.2"
   },
   "peerDependencies": {
     "react-native": ">=0.71.0"
@@ -291,7 +292,7 @@
     "glob": "^10.3.12",
     "mocha": "^10.1.0",
     "prebuild": "^13.0.1",
-    "react-native": "0.75.1",
+    "react-native": "0.77.1",
     "typedoc-plugin-rename-defaults": "^0.7.0"
   },
   "engines": {
@@ -316,6 +317,6 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-     "access": "public"
+    "access": "public"
   }
 }

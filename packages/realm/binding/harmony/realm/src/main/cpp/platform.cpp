@@ -98,6 +98,8 @@ void JsPlatformHelpers::remove_file(const std::string& path)
     }
 }
 
+void JsPlatformHelpers::exclude_from_icloud_backup(const std::string&, bool) {}
+
 void JsPlatformHelpers::print(const char* fmt, ...)
 {
     va_list vl;

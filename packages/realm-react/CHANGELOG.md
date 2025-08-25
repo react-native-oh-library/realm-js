@@ -1,24 +1,6 @@
-## vNext (TBD)
-
-### Deprecations
-* None
-
-### Enhancements
-* None
-
-### Fixed
-* <How to hit and notice issue? what was the impact?> ([#????](https://github.com/realm/realm-js/issues/????), since v?.?.?)
-* None
-
-### Compatibility
-* React Native >= v0.71.4
-* Realm Studio v15.0.0.
-* File format: generates Realms with format v24 (reads and upgrades file format v10).
-
-### Internal
-<!-- * Either mention core version or upgrade -->
-<!-- * Using Realm Core vX.Y.Z -->
-<!-- * Upgraded Realm Core from vX.Y.Z to vA.B.C -->
+# 0.11.1-rc.1
+## 更新内容
+* feat: add HarmonyOS support for realm-react 由 @quguiren 贡献 [75cbea4b8fd1dbc3b158974d2f66fa752ca0052a](https://gitee.com/openharmony-sig/rntpc_ios/pulls/2)
 
 ## 0.10.0 (2024-08-15)
 
