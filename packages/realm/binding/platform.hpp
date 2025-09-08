@@ -54,5 +54,8 @@ public:
 
     // print something
     static void print(const char* fmt, ...);
+
+    // excludes the path from icloud backup on iOS and no-op on other platforms
+    static void exclude_from_icloud_backup(const std::string& path, bool value);
 };
 } // namespace realm
