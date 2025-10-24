@@ -1,3 +1,7 @@
-# 12.14.3-rc.1
+# Changelog
+## v12.14.3-rc.1
+pre-release version 12.14.3-rc.1
+
+## v12.14.2
 ## 更新内容
-* feat: add HarmonyOS support for realm 由 @quguiren 贡献 [75cbea4b8fd1dbc3b158974d2f66fa752ca0052a](https://gitee.com/openharmony-sig/rntpc_ios/pulls/2)
+* feat: add OpenHarmony support for realm
