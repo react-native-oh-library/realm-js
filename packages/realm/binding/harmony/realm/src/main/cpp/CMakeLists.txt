@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_VERBOSE_MAKEFILE on)
 set(LOG_VERBOSITY_LEVEL 1)
 
@@ -10,7 +10,7 @@ if(DEFINED PACKAGE_FIND_FILE)
     include(${PACKAGE_FIND_FILE})
 endif()
 
-set(REAML_CORE_SRC_DIR "${NODE_MODULES}/@rreact-native-ohos/realm")
+set(REAML_CORE_SRC_DIR "${NODE_MODULES}/@react-native-ohos/realm")
 set(BINDING_FILES "${REAML_CORE_SRC_DIR}/binding")
 set(BINDING_JSI_FILES "${REAML_CORE_SRC_DIR}/binding/jsi")
 set(BINDGEN_FILES "${REAML_CORE_SRC_DIR}/bindgen/src")
