@@ -1,0 +1,11 @@
+[
+    {
+        "Name": "realm",
+        "License": "Apache License",
+        "License File": " LICENSE ",
+        "Version Number": "12.14.2",
+        "Owner" : "xiafeng@huawei.com",
+        "Upstream URL": "https://github.com/realm/realm-js",
+        "Description": "Realm is a mobile database: an alternative to SQLite & key-value stores."
+    }
+]
