@@ -1,7 +1,0 @@
-{
-  "cwd": "../..",
-  "include": [
-    "packages/realm/dist/**",
-    "packages/realm/src/**"
-  ]
-}

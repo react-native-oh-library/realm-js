@@ -21,7 +21,7 @@ import React from "react";
 import { createRealmContext } from "./RealmContext";
 
 export type { UseObjectHook } from "./useObject";
-export type { UseQueryHook, QueryHookOptions, QueryHookClassBasedOptions } from "./useQuery";
+export type { UseQueryHook, QueryHookOptions } from "./useQuery";
 
 const defaultContext = createRealmContext();
 
@@ -145,3 +145,5 @@ export { useUser, UserProvider } from "./UserProvider";
 export * from "./useAuth";
 export * from "./useEmailPasswordAuth";
 export * from "./types";
+export { createUseObject } from "./useObject";
+export { createUseQuery } from "./useQuery";
