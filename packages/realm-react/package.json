@@ -1,6 +1,6 @@
 {
   "name": "@react-native-ohos/realm-react",
-  "version": "0.11.1-rc.2",
+  "version": "0.12.0-rc.1",
   "description": "React specific hooks and implementation helpers for Realm",
   "type": "module",
   "main": "dist/index.cjs",
@@ -65,7 +65,7 @@
     "react": "18.3.1",
     "react-native": "0.77.1",
     "react-test-renderer": "18.3.1",
-    "@react-native-ohos/realm": "file:../realm/react-native-ohos-realm-12.14.3-rc.2.tgz",
+    "@react-native-ohos/realm": "file:../realm/react-native-ohos-realm-12.15.0-rc.1.tgz",
     "ts-jest": "^29.1.2"
   },
   "peerDependencies": {
