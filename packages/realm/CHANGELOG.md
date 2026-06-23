@@ -1,10 +1,6 @@
 # Changelog
 ## 鸿蒙化Log
 
-### v12.14.3-rc.2
-- release:react-native-oh-tpl/realm@12.14.3-rc.2
-- feat:升级realm core到14.14.0，适配autolink，realm-js升级到12.15.0版本
-
 ### v12.14.3-rc.1
 
 - pre-release version 12.14.3-rc.1
