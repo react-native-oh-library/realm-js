@@ -313,13 +313,7 @@
     ]
   },
   "harmony": {
-    "alias": "realm",
-    "autolinking": {
-      "cppPackageClassName": "RealmPackage",
-      "cmakeLibraryTargetName": "rnoh_realm",
-      "ohPackageName": "@react-native-ohos/realm",
-      "etsPackageClassName": "RNRealmPackage"
-    }
+    "alias": "realm"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

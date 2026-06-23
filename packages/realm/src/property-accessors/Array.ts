@@ -87,13 +87,11 @@ export function createArrayPropertyAccessor({
         assert.inTransaction(realm);
         assert.iterable(values);
 
-        // Taking a snapshot in case we're iterating the list we're mutating
-        const valuesSnapshot = values instanceof List ? values.snapshot() : values;
         const internal = binding.List.make(realm.internal, obj, columnKey);
         internal.removeAll();
         let index = 0;
         try {
-          for (const value of valuesSnapshot) {
+          for (const value of values) {
             listAccessor.insert(internal, index++, value);
           }
         } catch (err) {
