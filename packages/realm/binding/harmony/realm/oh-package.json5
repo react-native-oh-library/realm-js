@@ -1,6 +1,6 @@
 {
   "name": "@react-native-ohos/realm",
-  "version": "12.14.3-rc.1",
+  "version": "12.14.3-rc.3",
   "description": "Realm by MongoDB is an offline-first mobile database: an alternative to SQLite and key-value stores",
   "type": "module",
   "main": "index.ets",
