@@ -21,6 +21,9 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <cstdio>
+#include <sys/stat.h>
+#include <errno.h>
+#include <stdexcept>
 
 #include "platform.hpp"
 #include <glog/logging.h>
@@ -55,7 +58,21 @@ std::string JsPlatformHelpers::default_realm_file_directory()
     return s_default_realm_directory;
 }
 
-void JsPlatformHelpers::ensure_directory_exists_for_file(const std::string& file) {}
+void JsPlatformHelpers::ensure_directory_exists_for_file(const std::string& file)
+{
+    size_t pos = 0;
+    while ((pos = file.find_first_of('/', pos)) != std::string::npos) {
+        if (pos == 0) {
+            pos++;
+            continue;
+        }
+        std::string dir_path = file.substr(0, pos++);
+        if (mkdir(dir_path.c_str(), 0755) != 0 && errno != EEXIST) {
+            throw std::runtime_error("Realm: failed to create directory '" + dir_path +
+                                     "' (errno=" + std::to_string(errno) + ")");
+        }
+    }
+}
 
 void JsPlatformHelpers::copy_bundled_realm_files()
 {
@@ -69,12 +86,11 @@ void JsPlatformHelpers::copy_bundled_realm_files()
 
 void JsPlatformHelpers::remove_realm_files_from_directory(const std::string& directory)
 {
-    std::string path = s_default_realm_directory + "/*.realm " + s_default_realm_directory + "/*.realm.lock";
     auto rnInstancePtr = VarCache::Singleton()->GetContext().instance.lock();
     if (rnInstancePtr != nullptr) {
         auto turboModule = rnInstancePtr->getTurboModule("RNRealm");
         auto arkTsTurboModule = std::dynamic_pointer_cast<rnoh::ArkTSTurboModule>(turboModule);
-        arkTsTurboModule->callSync("removeFile", {path});
+        arkTsTurboModule->callSync("removeRealmFilesFromDirectory", {directory});
     }
 }
 
