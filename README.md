@@ -1,10 +1,13 @@
-# @react-native-ohos/realm
-This project is based on [realm-js@v12.14.2](https://github.com/realm/realm-js/tree/v12.14.2)
-## Documentation
-[中文](https://gitee.com/react-native-oh-library/usage-docs/blob/master/zh-cn/realm-js.md)
+#  迁移声明
 
-[English](https://gitee.com/react-native-oh-library/usage-docs/blob/master/en/realm-js.md)
+- 本仓库已迁移至 GitCode：[CPF-RN/rntpc_realm-js](https://gitcode.com/CPF-RN/rntpc_realm-js)。
+- 包名已更改为 `@react-native-ohos/realm`，支持直接从 npm 下载。
+- 更多详情请查阅新仓库的 README 文件。
+- 本仓库旧版本的文档已归档：[链接](/doc/zh-cn.md)
 
-## License
-This library is licensed under [Apache License 2.0](https://github.com/react-native-oh-library/realm-js/blob/sig/LICENSE).
+# Migration Announcement
 
+- This repository has been migrated to GitCode：[CPF-RN/rntpc_realm-js](https://gitcode.com/CPF-RN/rntpc_realm-js)       
+- The package name has been changed to `@react-native-ohos/realm` and is now available for direct download from npm.
+- For more details, please refer to the README in the new repository.
+- Archived documentation for versions in this repository can be found here: [Link](/doc/en.md)
